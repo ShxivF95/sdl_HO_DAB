@@ -1,0 +1,15 @@
+resources:
+  pipelines:
+    PL_Silver_transformations:
+      name: PL_Silver_transformations
+
+      libraries:
+        - file:
+            path: ../src/DAB_etl/etl_silver.py
+
+      schema: silver_stg
+      catalog: surakshadb
+
+      continuous: false
+      photon: true
+      serverless: true

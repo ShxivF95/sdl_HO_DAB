@@ -4,14 +4,14 @@ bundle:
 include:
   - resources/*.yml
 
-variables:
-  catalog:
-    description: The Unity Catalog to use
-    default: surakshadb
+# variables:
+#   catalog:
+#     description: The Unity Catalog to use
+#     default: surakshadb
 
-  schema:
-    description: The schema to use
-    default: bronze_stg
+#   schema:
+#     description: The schema to use
+#     default: bronze_stg
 
 targets:
   dev:
@@ -21,6 +21,6 @@ targets:
     workspace:
       host: https://adb-4471979281132357.17.azuredatabricks.net
 
-    variables:
-      # Override schema ONLY for dev
-      schema: ${workspace.current_user.short_name}_bronze
+    # variables:
+    #   # Override schema ONLY for dev
+    #   schema: ${workspace.current_user.short_name}

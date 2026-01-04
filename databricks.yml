@@ -24,3 +24,9 @@ targets:
     # variables:
     #   # Override schema ONLY for dev
     #   schema: ${workspace.current_user.short_name}
+
+  prod:
+    mode: production
+
+    workspace:
+      host: https://adb-4471979281132357.17.azuredatabricks.net

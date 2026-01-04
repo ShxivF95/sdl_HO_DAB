@@ -1,7 +1,7 @@
 resources:
   pipelines:
     PL_Silver_transformations:
-      name: PL_Silver_transformations
+      name: PL_Silver_transformations_${bundle.target}
 
       libraries:
         - file:

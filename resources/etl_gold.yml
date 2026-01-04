@@ -1,7 +1,7 @@
 resources:
   pipelines:
     PL_gold_BI:
-      name: PL_gold_BI
+      name: PL_gold_BI_${bundle.target}
 
       libraries:
         - file:

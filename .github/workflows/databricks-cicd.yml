@@ -26,9 +26,11 @@ jobs:
         run: databricks bundle validate -t dev
 
 
+
   deploy-dev:
     name: CD - Deploy Dev
     needs: ci
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
 
     env:
@@ -43,4 +45,5 @@ jobs:
 
       - name: Deploy to Dev
         run: databricks bundle deploy -t dev
+
 

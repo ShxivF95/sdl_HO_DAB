@@ -9,6 +9,7 @@ resources:
 
       #schema: bronze_stg
       catalog: surakshadb
+      publishing_mode: none
 
       continuous: false
       photon: true

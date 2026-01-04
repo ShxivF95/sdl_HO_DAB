@@ -1,0 +1,15 @@
+resources:
+  pipelines:
+    PL_gold_BI:
+      name: PL_gold_BI
+
+      libraries:
+        - file:
+            path: ../src/DAB_etl/etl_gold.py
+
+      schema: gold_stg
+      catalog: surakshadb
+
+      continuous: false
+      photon: true
+      serverless: true

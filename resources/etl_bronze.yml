@@ -6,9 +6,9 @@ resources:
       libraries:
         - file:
             path: ../src/DAB_etl/etl_bronze.py
-
-      schema: bronze_stg
+  
       catalog: surakshadb
+      target: bronze_stg
 
       continuous: false
       photon: true

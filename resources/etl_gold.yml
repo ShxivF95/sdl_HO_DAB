@@ -7,8 +7,8 @@ resources:
         - file:
             path: ../src/DAB_etl/etl_gold.py
 
-      schema: gold_stg
       catalog: surakshadb
+      target: gold_stg
 
       continuous: false
       photon: true

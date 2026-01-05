@@ -1,14 +1,15 @@
 resources:
   pipelines:
     gold_pipeline:
-      # name: PL_gold_BI_${bundle.target}
-      
+      name: PL_gold_BI_${bundle.target}
+
       libraries:
         - file:
-            path: ../src/DAB_etl/etl_gold.py
+            path: ../src/DAB_etl/etl_bronze.py
       
-      target: surakshadb.gold_stg
+      catalog: surakshadb
+      schema: gold_stg
       
       continuous: false
-      photon: true
+      photon: true 
       serverless: true

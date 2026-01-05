@@ -1,14 +1,15 @@
 resources:
   pipelines:
     bronze_pipeline:
-      # name: PL_bronze_ingestion_${bundle.target}
+      name: PL_bronze_ingestion_${bundle.target}
       
       libraries:
         - file:
             path: ../src/DAB_etl/etl_bronze.py
       
-      target: surakshadb.bronze_stg
+      catalog: surakshadb
+      schema: bronze_stg
       
       continuous: false
-      photon: true
+      photon: true 
       serverless: true

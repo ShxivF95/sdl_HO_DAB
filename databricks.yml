@@ -20,26 +20,13 @@ targets:
 
     workspace:
       host: https://adb-4471979281132357.17.azuredatabricks.net
-    resources:
-      pipelines:
-        bronze_pipeline:
-          name: PL_bronze_ingestion_dev
-        silver_pipeline:
-          name: PL_silver_transformations_dev
-        gold_pipeline:
-          name: PL_gold_BI_dev
-    
+
+    # variables:
+    #   # Override schema ONLY for dev
+    #   schema: ${workspace.current_user.short_name}
 
   prod:
     mode: production
 
     workspace:
       host: https://adb-4471979281132357.17.azuredatabricks.net
-    resources:
-      pipelines:
-        bronze_pipeline:
-          name: PL_bronze_ingestion_prod
-        silver_pipeline:
-          name: PL_silver_transformations_prod
-        gold_pipeline:
-          name: PL_gold_BI_prod

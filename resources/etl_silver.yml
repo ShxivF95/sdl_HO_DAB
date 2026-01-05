@@ -1,15 +1,15 @@
 resources:
   pipelines:
     silver_pipeline:
-      # name: PL_Silver_transformations_${bundle.target}
+      name: PL_silver_transformations_${bundle.target}
 
       libraries:
         - file:
-            path: ../src/DAB_etl/etl_silver.py
-
-      target: surakshadb.silver_stg
-
+            path: ../src/DAB_etl/etl_bronze.py
+      
+      catalog: surakshadb
+      schema: silver_stg
+      
       continuous: false
-      photon: true
+      photon: true 
       serverless: true
-

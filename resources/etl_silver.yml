@@ -7,9 +7,9 @@ resources:
         - file:
             path: ../src/DAB_etl/etl_silver.py
 
-      catalog: surakshadb    
-      target: silver_stg
+      target: surakshadb.silver_stg
 
       continuous: false
       photon: true
       serverless: true
+

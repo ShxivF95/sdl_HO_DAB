@@ -14,16 +14,18 @@ jobs:
 
     env:
       DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
-      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_PAT}}
+      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_PAT }}
 
     steps:
       - uses: actions/checkout@v4
       - uses: databricks/setup-cli@v0.221.0
 
       - name: Validate bundle (dev)
-        run: databricks bundle validate --target dev
-
-
+        run: |
+          databricks bundle validate \
+            --target dev \
+            --var="catalog=surakshadb" \
+            --var="pipeline_schema=db_stg"
 
   deploy-dev:
     name: CD - Deploy Dev
@@ -34,13 +36,14 @@ jobs:
     env:
       DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
       DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_PAT }}
-     
 
     steps:
       - uses: actions/checkout@v4
       - uses: databricks/setup-cli@v0.221.0
 
       - name: Deploy to Dev
-        run: databricks bundle deploy --target dev
-
-
+        run: |
+          databricks bundle deploy \
+            --target dev \
+            --var="catalog=surakshadb" \
+            --var="pipeline_schema=db_stg"

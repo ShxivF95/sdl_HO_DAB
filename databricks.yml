@@ -30,3 +30,4 @@ targets:
 
     workspace:
       host: https://adb-4471979281132357.17.azuredatabricks.net
+      root_path: /Shared/.bundle/${bundle.name}/${bundle.target} 

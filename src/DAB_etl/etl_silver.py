@@ -2,6 +2,13 @@ import dlt
 
 # ===================== acxtestdone (CDC SCD-1) ================================================
 
+@dlt.view(
+    name= "vw_br_acxtestdone"
+)
+
+def vw_br_acxtestdone():
+    return spark.readStream.table("surakshadb.bronze_stg.br_acxtestdone")
+
 # Create an empty streaming table for silver layer
 
 dlt.create_streaming_table(
@@ -11,7 +18,7 @@ dlt.create_streaming_table(
 
 dlt.create_auto_cdc_flow(
     target="sil_acxtestdone",
-    source="surakshadb.bronze_stg.br_acxtestdone",
+    source="vw_br_acxtestdone",
     keys=["SALESID", "ITEMID"],
     sequence_by="Billed_datetime",
     stored_as_scd_type=1
@@ -37,6 +44,16 @@ def sil_routinetests():
 
 # ===================== patientsdatadone (CDC SCD-2) ================================================
 
+@dlt.view(
+    name= "vw_br_patientsdata"
+)
+
+def vw_br_patientsdata():
+    return spark.readStream.table("surakshadb.bronze_stg.br_patientsdata")
+
+
+# create an empty streaming table for silver layer
+
 dlt.create_streaming_table(
     name= "sil_patientsdata",
     comment= "Silver SCD-2 via auto CDC"
@@ -44,7 +61,7 @@ dlt.create_streaming_table(
 
 dlt.create_auto_cdc_flow(
     target="sil_patientsdata",
-    source="surakshadb.bronze_stg.br_patientsdata",
+    source="vw_br_patientsdata",
     keys=["Patient_ID"],
     sequence_by="ingested_at",
     stored_as_scd_type=2,

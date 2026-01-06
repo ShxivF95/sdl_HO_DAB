@@ -11,7 +11,7 @@ dlt.create_streaming_table(
 
 dlt.create_auto_cdc_flow(
     target="sil_acxtestdone",
-    source="br_acxtestdone",
+    source="LIVE.br_acxtestdone",
     keys=["SALESID", "ITEMID"],
     sequence_by="Billed_datetime",
     stored_as_scd_type=1
@@ -24,7 +24,7 @@ dlt.create_auto_cdc_flow(
     comment="Silver append-only attendance fact table"
 )
 def sil_doctorattendance():
-    return dlt.read_stream("br_doctorattendance")
+    return dlt.read_stream("LIVE.br_doctorattendance")
 
 # ===================== routinetests (append-only) ===============================================
 
@@ -33,7 +33,7 @@ def sil_doctorattendance():
     comment="Silver append-only routine test facts"
 )
 def sil_routinetests():
-    return dlt.read_stream("br_routinetests")
+    return dlt.read_stream("LIVE.br_routinetests")
 
 # ===================== patientsdatadone (CDC SCD-2) ================================================
 
@@ -44,7 +44,7 @@ dlt.create_streaming_table(
 
 dlt.create_auto_cdc_flow(
     target="sil_patientsdata",
-    source="br_patientsdata",
+    source="LIVE.br_patientsdata",
     keys=["Patient_ID"],
     sequence_by="ingested_at",
     stored_as_scd_type=2,

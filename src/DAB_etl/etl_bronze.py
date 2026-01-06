@@ -1,7 +1,6 @@
 import dlt
 from pyspark.sql.functions import col, current_timestamp
 
-# It's best practice to keep constants like paths easily configurable
 adls_path = "abfss://suraksha@hisadls.dfs.core.windows.net"
 
 source_tables = {
@@ -18,8 +17,6 @@ def create_bronze_table(table_name, folder_path):
         comment=f"Raw ingestion from ADLS folder: {folder_path}"
     )
     def streaming_table():
-        # Note the use of .option("cloudFiles.inferColumnTypes", "true") 
-        # This helps Auto Loader handle schema evolution automatically.
         return (
             spark.readStream.format("cloudFiles")
             .option("cloudFiles.format", "csv")

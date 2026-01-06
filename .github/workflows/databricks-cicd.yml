@@ -22,8 +22,7 @@ jobs:
 
       - name: Validate bundle (dev)
         run: |
-          databricks bundle validate \
-            --target dev \
+          databricks bundle validate --target dev \
             --var="catalog=surakshadb" \
             --var="pipeline_schema=db_stg"
 
@@ -43,7 +42,6 @@ jobs:
 
       - name: Deploy to Dev
         run: |
-          databricks bundle deploy \
-            --target dev \
+          databricks bundle deploy --target dev \
             --var="catalog=surakshadb" \
             --var="pipeline_schema=db_stg"

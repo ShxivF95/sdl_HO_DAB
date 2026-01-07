@@ -25,10 +25,10 @@ jobs:
       - uses: databricks/setup-cli@v0.221.0
 
       - name: Validate Dev Target
-        run: databricks bundle validate --target dev
+        run: databricks bundle validate --target dev          # Running basic validation on dev target
 
-      - name: Validate Prod Target
-        run: databricks bundle validate --target prod
+      - name: Validate Prod Target                      
+        run: databricks bundle validate --target prod         # Running basic validation on prod target
 
 
   deploy-dev:
@@ -47,7 +47,7 @@ jobs:
       - uses: databricks/setup-cli@v0.221.0
 
       - name: Deploy to Dev
-        run: databricks bundle deploy --target dev
+        run: databricks bundle deploy --target dev               # Deploying to dev for feature branches 
 
 
   deploy-prod:
@@ -66,4 +66,4 @@ jobs:
       - uses: databricks/setup-cli@v0.221.0
 
       - name: Deploy to Prod
-        run: databricks bundle deploy --target prod
+        run: databricks bundle deploy --target prod             # Deploying to prod for main branch

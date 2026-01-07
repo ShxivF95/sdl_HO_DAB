@@ -35,7 +35,7 @@ jobs:
     name: CD - Deploy Dev
     needs: ci
     
-    if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/feature/') || github.ref == 'refs/heads/sdl_IT'
+    if: github.event_name == 'push' && (startsWith(github.ref, 'refs/heads/feature/') || github.ref == 'refs/heads/sdl_IT')
     runs-on: ubuntu-latest
 
     env:
@@ -54,7 +54,7 @@ jobs:
     name: CD - Deploy Prod
     needs: ci
 
-    if: github.event_name == 'push' && github.ref == 'refs/head/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
     env:
@@ -64,6 +64,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: databricks/setup-cli@v0.221.0
-      
+
       - name: Deploy to Prod
         run: databricks bundle deploy --target prod

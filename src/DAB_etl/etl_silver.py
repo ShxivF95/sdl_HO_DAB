@@ -1,13 +1,18 @@
 import dlt
-from pyspark.sql.functions import *
 
+catalog_name = spark.conf.get("pipelines.catalog")
+schema_name = spark.conf.get("pipelines.target")
 
-# acxtestdone (CDC SCD-1)
+# ===================== acxtestdone (CDC SCD-1) ================================================
 
+@dlt.view(
+    name= "vw_br_acxtestdone"
+)
 
-@dlt.view(name="vw_br_acxtestdone")
 def vw_br_acxtestdone():
-    return dlt.read_stream("br_acxtestdone")
+    return spark.readStream.table(f"{catalog_name}.{schema_name}.br_acxtestdone")
+
+# Create an empty streaming table for silver layer
 
 dlt.create_streaming_table(
     name="sil_acxtestdone",
@@ -22,39 +27,38 @@ dlt.create_auto_cdc_flow(
     stored_as_scd_type=1
 )
 
-
-# doctorattendance (append-only)
-
+# ===================== doctorattendance (append-only) ==========================================
 
 @dlt.table(
     name="sil_doctorattendance",
     comment="Silver append-only attendance fact table"
 )
 def sil_doctorattendance():
-    return dlt.read_stream("br_doctorattendance")
+    return spark.readStream.table(f"{catalog_name}.{schema_name}.br_doctorattendance")
 
-
-# routinetests (append-only)
-
+# ===================== routinetests (append-only) ===============================================
 
 @dlt.table(
     name="sil_routinetests",
     comment="Silver append-only routine test facts"
 )
 def sil_routinetests():
-    return dlt.read_stream("br_routinetests")
+    return spark.readStream.table(f"{catalog_name}.{schema_name}.br_routinetests")
 
+# ===================== patientsdatadone (CDC SCD-2) ================================================
 
-# patientsdata (CDC SCD-2)
+@dlt.view(
+    name= "vw_br_patientsdata"
+)
 
-
-@dlt.view(name="vw_br_patientsdata")
 def vw_br_patientsdata():
-    return dlt.read_stream("br_patientsdata")
+    return spark.readStream.table(f"{catalog_name}.{schema_name}.br_patientsdata")
+
+# create an empty streaming table for silver layer
 
 dlt.create_streaming_table(
-    name="sil_patientsdata",
-    comment="Silver SCD-2 via auto CDC"
+    name= "sil_patientsdata",
+    comment= "Silver SCD-2 via auto CDC"
 )
 
 dlt.create_auto_cdc_flow(
@@ -63,11 +67,5 @@ dlt.create_auto_cdc_flow(
     keys=["Patient_ID"],
     sequence_by="ingested_at",
     stored_as_scd_type=2,
-    track_history_column_list=[
-        "Patient_Name",
-        "GENDER",
-        "Mobile_no",
-        "ZIPCODE",
-        "DOB"
-    ]
+    track_history_column_list = ["Patient_Name", "GENDER", "Mobile_no", "ZIPCODE", "DOB"]    # demographic changes should be historized to avoiding noise
 )

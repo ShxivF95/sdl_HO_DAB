@@ -1,35 +1,35 @@
 import dlt
-from pyspark.sql.functions import expr
+from pyspark.sql.functions import *
 
-# ===================== gold_dim_patients =====================
+catalog_name = spark.conf.get("pipelines.catalog")
+schema_name = spark.conf.get("pipelines.target")
+
 
 @dlt.table(
-    name="gold_dim_patients",
-    comment="Current patients dimension for BI"
+    name= "gold_dim_patients",
+    comment= "current patients dimention for BI"
 )
+
 def gold_dim_patients():
-    return (
-        dlt.read_stream("sil_patientsdata")
-          .filter("__END_AT IS NULL")
-          .select(
-              "Patient_ID",
-              "Patient_Name",
-              "GENDER",
-              "DOB",
-              "ZIPCODE",
-              "Mobile_no"
-          )
-    )
+    df = spark.readStream.table(f"{catalog_name}.{schema_name}.sil_patientsdata")\
+        .filter("__END_AT is NULL")\
+            .select("Patient_ID",
+               "Patient_Name",
+               "GENDER",
+               "DOB",
+               "ZIPCODE",
+               "Mobile_no")
+    return df
 
-# ===================== gold_routinetests =====================
+#================================================================================================
 
 @dlt.table(
-    name="gold_routinetests",
-    comment="Gold routine tests with reporting SLA metrics"
+    name= "gold_routinetests"
 )
+
 def gold_routinetests():
     return (
-        dlt.read_stream("sil_routinetests")
+        spark.readStream.table(f"{catalog_name}.{schema_name}.sil_routinetests")
           .withColumn(
               "report_delay_minutes",
               expr(
@@ -43,3 +43,4 @@ def gold_routinetests():
               )
           )
     )
+   

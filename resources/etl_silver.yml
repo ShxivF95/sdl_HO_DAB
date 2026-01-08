@@ -2,14 +2,18 @@ resources:
   pipelines:
     silver_pipeline:
       name: PL_silver_transformations_${bundle.target}
-
       libraries:
         - file:
             path: ../src/DAB_etl/etl_silver.py
       
       catalog: ${var.catalog}
-      target: ${var.silver_schema}
-      
+      target: ${var.silver_schema}       # This is where the NEW Silver tables will be created
+       
+
+      configuration:
+        pipelines.catalog: ${var.catalog}
+        pipelines.target: ${var.bronze_schema}  # We pass the BRONZE schema name so the Python code knows where to read FROM
+        
       continuous: false
       photon: true 
       serverless: true

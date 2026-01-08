@@ -2,7 +2,7 @@ import dlt
 from pyspark.sql.functions import *
 
 catalog_name = spark.conf.get("pipelines.catalog")
-schema_name = spark.conf.get("pipelines.target")
+schema_name = spark.conf.get("pipelines.silver_schema")
 
 
 @dlt.table(

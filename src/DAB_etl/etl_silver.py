@@ -1,7 +1,7 @@
 import dlt
 
 catalog_name = spark.conf.get("pipelines.catalog")
-schema_name = spark.conf.get("pipelines.target")
+schema_name = spark.conf.get("pipelines.bronze_schema")
 
 # ===================== acxtestdone (CDC SCD-1) ================================================
 

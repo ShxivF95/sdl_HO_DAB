@@ -9,10 +9,6 @@ resources:
       
       catalog: ${var.catalog}
       target: ${var.gold_schema}     # This is where the NEW Gold tables will be created
-
-      configuration:
-        pipelines.catalog: ${var.catalog}
-        pipelines.target: ${var.silver_schema}    # We pass the BRONZE schema name so the Python code knows where to read FROM
       
       continuous: false
       photon: true 

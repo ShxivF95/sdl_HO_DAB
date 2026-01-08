@@ -1,18 +1,19 @@
 import dlt
 from pyspark.sql.functions import expr
 
+# DLT-provided pipeline values (WRITE location)
 catalog_name = spark.conf.get("pipelines.catalog")
 gold_schema  = spark.conf.get("pipelines.target")
 
+# READ location (silver)
 SILVER_SCHEMA = "silver_stg"
 
 # ===================== patients dimension =====================
 
 @dlt.table(
-    name= "gold_dim_patients",
+    name="gold_dim_patients",
     comment="Current patients dimension for BI"
 )
-
 def gold_dim_patients():
     return (
         spark.read.table(
@@ -32,10 +33,9 @@ def gold_dim_patients():
 # ===================== routine tests fact =====================
 
 @dlt.table(
-    name= "gold_routinetests",
+    name="gold_routinetests",
     comment="Gold routine tests with report delay metrics"
 )
-
 def gold_routinetests():
     return (
         spark.read.table(

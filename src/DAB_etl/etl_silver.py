@@ -7,19 +7,15 @@ BRONZE_SCHEMA = "bronze_stg"
 
 # ===================== acxtestdone (CDC SCD-1) =====================
 
-@dlt.view(
-        name= "vw_br_acxtestdone")
-
+@dlt.view(name="vw_br_acxtestdone")
 def vw_br_acxtestdone():
     return spark.readStream.table(
         f"{catalog_name}.{BRONZE_SCHEMA}.br_acxtestdone"
     )
 
-# create an empty streaming table to hold the SCD-1 data
-
 dlt.create_streaming_table(
-    name= "sil_acxtestdone",
-    comment= "Silver SCD-1 via auto CDC"
+    name="sil_acxtestdone",
+    comment="Silver SCD-1 via auto CDC"
 )
 
 dlt.create_auto_cdc_flow(
@@ -33,10 +29,9 @@ dlt.create_auto_cdc_flow(
 # ===================== doctorattendance (append-only) =====================
 
 @dlt.table(
-    name= "sil_doctorattendance",
+    name="sil_doctorattendance",
     comment="Silver append-only attendance fact table"
 )
-
 def sil_doctorattendance():
     return spark.read.table(
         f"{catalog_name}.{BRONZE_SCHEMA}.br_doctorattendance"
@@ -45,10 +40,9 @@ def sil_doctorattendance():
 # ===================== routinetests (append-only) =====================
 
 @dlt.table(
-    name= "sil_routinetests",
+    name="sil_routinetests",
     comment="Silver append-only routine test facts"
 )
-
 def sil_routinetests():
     return spark.read.table(
         f"{catalog_name}.{BRONZE_SCHEMA}.br_routinetests"
@@ -56,18 +50,14 @@ def sil_routinetests():
 
 # ===================== patientsdata (CDC SCD-2) =====================
 
-@dlt.view(
-        name= "vw_br_patientsdata")
-
+@dlt.view(name="vw_br_patientsdata")
 def vw_br_patientsdata():
     return spark.readStream.table(
         f"{catalog_name}.{BRONZE_SCHEMA}.br_patientsdata"
     )
 
-# create an empty streaming table to hold the SCD-2 data
-
 dlt.create_streaming_table(
-    name= "sil_patientsdata",
+    name="sil_patientsdata",
     comment="Silver SCD-2 via auto CDC"
 )
 
@@ -77,5 +67,11 @@ dlt.create_auto_cdc_flow(
     keys=["Patient_ID"],
     sequence_by="ingested_at",
     stored_as_scd_type=2,
-    track_history_column_list=["Patient_Name", "GENDER", "Mobile_no", "ZIPCODE", "DOB"]
+    track_history_column_list=[
+        "Patient_Name",
+        "GENDER",
+        "Mobile_no",
+        "ZIPCODE",
+        "DOB"
+    ]
 )

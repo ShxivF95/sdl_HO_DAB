@@ -8,7 +8,7 @@ resources:
             path: ../src/DAB_etl/etl_gold.py
       
       catalog: ${var.catalog}
-      target: ${var.gold_schema}
+      target: ${var.gold_schema}     # This is where the NEW Gold tables will be created
       
       continuous: false
       photon: true 

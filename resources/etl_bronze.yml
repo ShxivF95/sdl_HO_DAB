@@ -8,7 +8,7 @@ resources:
             path: ../src/DAB_etl/etl_bronze.py
       
       catalog: ${var.catalog}
-      target: ${var.bronze_schema}
+      target: ${var.bronze_schema}      # This is where the NEW Bronze tables will be created
       
       continuous: false
       photon: true 

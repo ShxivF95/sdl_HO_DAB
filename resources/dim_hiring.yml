@@ -14,10 +14,10 @@ resources:
           notebook_task:
             notebook_path: ../src/DAB_etl/dim_hiring.ipynb
             
-          environment_key: hiring_table_environment
+      #     environment_key: hiring_table_environment
 
-      environments:
-        - environment_key: hiring_table_environment
-          spec:
-            # client: "serverless"
-            environment_version: "4"
+      # environments:
+      #   - environment_key: hiring_table_environment
+      #     spec:
+      #       # client: "serverless"
+      #       environment_version: "4"

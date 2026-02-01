@@ -3,14 +3,11 @@ resources:
     hiring_table:
       name: hiring_table
 
+      run_as:
+        user_name: shiv@suraksha555.onmicrosoft.com
+
       queue:
         enabled: true
-        performance_target: PERFORMANCE_OPTIMIZED
-
-      environments:
-        - environment_key: hiring_table_environment
-          spec:
-            environment_version: "4"
 
       tasks:
         - task_key: hiring_table
@@ -18,3 +15,8 @@ resources:
             notebook_path: ../src/DAB_etl/dim_hiring.ipynb
             source: GIT
           environment_key: hiring_table_environment
+
+      environments:
+        - environment_key: hiring_table_environment
+          spec:
+            environment_version: "4"

@@ -2,9 +2,13 @@ resources:
   jobs:
     symptoms_table:
       name: symptoms_table
+
+      run_as:
+        user_name: shiv@suraksha555.onmicrosoft.com
+
       queue:
         enabled: true
-        performance_target: PERFORMANCE_OPTIMIZED
+
       tasks:
         - task_key: symptoms_table
           notebook_task:

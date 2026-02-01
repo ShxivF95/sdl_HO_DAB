@@ -2,9 +2,13 @@ resources:
   jobs:
     hiring_raw:
       name: hiring_raw
+
+      run_as:
+        user_name: shiv@suraksha555.onmicrosoft.com
+
       queue:
         enabled: true
-        performance_target: PERFORMANCE_OPTIMIZED
+      
       tasks:
         - task_key: hiring_raw
           notebook_task:

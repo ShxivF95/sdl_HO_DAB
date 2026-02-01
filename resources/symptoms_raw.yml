@@ -3,8 +3,8 @@ resources:
     symptoms_raw:
       name: symptoms_raw
 
-      run_as:
-        user_name: shiv@suraksha555.onmicrosoft.com
+      # run_as:
+      #   user_name: shiv@suraksha555.onmicrosoft.com
 
       queue:
         enabled: true
@@ -13,4 +13,3 @@ resources:
         - task_key: symptoms_raw
           notebook_task:
             notebook_path: ../src/DAB_etl/Symptoms_Raw.ipynb
-            source: GIT

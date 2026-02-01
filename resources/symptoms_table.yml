@@ -3,9 +3,6 @@ resources:
     symptoms_table:
       name: symptoms_table
 
-      run_as:
-        user_name: shiv@suraksha555.onmicrosoft.com
-
       queue:
         enabled: true
 
@@ -13,4 +10,3 @@ resources:
         - task_key: symptoms_table
           notebook_task:
             notebook_path: ../src/DAB_etl/Symptoms_table.ipynb
-            source: GIT

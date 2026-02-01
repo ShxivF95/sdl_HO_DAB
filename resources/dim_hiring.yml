@@ -3,8 +3,8 @@ resources:
     hiring_table:
       name: hiring_table
 
-      run_as:
-        user_name: shiv@suraksha555.onmicrosoft.com
+      # run_as:
+      #   user_name: shiv@suraksha555.onmicrosoft.com
 
       queue:
         enabled: true
@@ -13,11 +13,11 @@ resources:
         - task_key: hiring_table
           notebook_task:
             notebook_path: ../src/DAB_etl/dim_hiring.ipynb
-            source: GIT
+            
           environment_key: hiring_table_environment
 
       environments:
         - environment_key: hiring_table_environment
           spec:
-            client: "serverless"
+            # client: "serverless"
             environment_version: "4"
